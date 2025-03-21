@@ -84,6 +84,14 @@ jobs:
       - name: Run brew readall on all casks
         run: brew readall --os=all --arch=all ${{github.repository}}
 
-      - name: Run brew audit --skip-style on ${{github.repository}}
+      - name: Run brew audit --skip-style
+        run: |
+          brew audit --os=all --arch=all --skip-style --except=version --tap ${{github.repository}}
+
+      - name: Run brew audit --online on ${{github.repository}}
         run: |
           brew audit --os=all --arch=all --skip-style --except=version --online --tap ${{github.repository}}
+
+      - name: Run brew audit --signing --online
+        run: |
+          brew audit --os=all --arch=all --skip-style --except=version --signing --online --tap ${{github.repository}}
