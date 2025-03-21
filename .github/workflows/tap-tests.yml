@@ -61,9 +61,9 @@ jobs:
           key: syntax-style-cache-${{ github.sha }}
           restore-keys: syntax-style-cache-
 
-      - run: brew style
+      - run: brew style ${{ github.repository }}
 
-      - run: brew typecheck
+      - run: brew typecheck ${{ github.repository }}
 
   audit:
     name: audit
@@ -82,8 +82,8 @@ jobs:
           test-bot: false
 
       - name: Run brew readall on all casks
-        run: brew readall --os=macos --arch=all ${{github.repository}}
+        run: brew readall --os=all --arch=all ${{github.repository}}
 
       - name: Run brew audit --skip-style on ${{github.repository}}
         run: |
-          brew audit --os=macos --arch=all --skip-style --except=version --online --tap ${{github.repository}}
+          brew audit --os=all --arch=all --skip-style --except=version --online --tap ${{github.repository}}
