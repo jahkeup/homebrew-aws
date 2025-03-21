@@ -4,12 +4,18 @@ brew=brew
 TEST_HOMEBREW_TAP?=aws/homebrew-aws-next
 export HOMEBREW_PREFIX=$(shell $(brew) --prefix)
 
+export HOMEBREW_COLOR?=1
+export HOMEBREW_NO_EMOJI?=1
+export HOMEBREW_SIMULATE_MACOS_ON_LINUX?=1
+export HOMEBREW_VERBOSE?=1
+
 export HOMEBREW_DEVELOPER=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_ENV_HINTS=1
-export HOMEBREW_BOOTSNAP=1
+export HOMEBREW_BOOTSNAP=0
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export HOMEBREW_VERIFY_ATTESTATIONS=1
+
 
 .default: check-style
 
@@ -29,4 +35,4 @@ check-style:
 	$(brew) style .
 
 check-audit:
-	$(brew) audit --signing --os=all --arch=all --online --tap $(TEST_HOMEBREW_TAP)
+	$(brew) audit --verbose --signing --os=all --arch=all --online --tap $(TEST_HOMEBREW_TAP)
