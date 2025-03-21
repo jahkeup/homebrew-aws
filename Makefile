@@ -21,8 +21,7 @@ export HOMEBREW_VERIFY_ATTESTATIONS=1
 
 dev-setup: test-tap
 
-fmt format:
-	$(brew) style --fix .
+fmt format: check-style
 
 test-tap:
 	@-echo "(re)initialize tap worktree" >&2; sleep 1;
